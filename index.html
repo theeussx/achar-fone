@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#12243f">
+<meta name="description" content="Encontre seu fone Bluetooth perdido pela intensidade do sinal.">
+<title>Achar meu fone</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Achar meu fone</h1>
+    <p>Ande com o celular. O círculo enche e o bipe acelera quando você chega perto.</p>
+  </header>
+
+  <section class="meter" id="meter" role="meter" aria-label="Proximidade do fone" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Sem aparelho">
+    <div class="pulse" id="pulse" aria-hidden="true"></div>
+    <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+      <circle cx="100" cy="100" r="88" stroke="var(--track)"/>
+      <circle id="arc" cx="100" cy="100" r="88" stroke="var(--cold)" stroke-dasharray="552.9" stroke-dashoffset="552.9"/>
+    </svg>
+    <div class="center" aria-hidden="true">
+      <div id="state">Sem aparelho</div>
+      <div id="rssi">—</div>
+      <div id="dist"></div>
+    </div>
+  </section>
+  <div class="sr-only" id="announce" role="status" aria-live="polite"></div>
+
+  <svg class="spark" viewBox="0 0 120 30" preserveAspectRatio="none" role="img" aria-label="Histórico recente da intensidade do sinal">
+    <polyline id="line" fill="none" stroke="var(--cold)" stroke-width="1.5" vector-effect="non-scaling-stroke" points=""/>
+  </svg>
+
+  <p id="msg" role="status" data-kind="info"></p>
+
+  <button id="pick" type="button">Escolher o fone</button>
+  <button id="stop" type="button" class="sec" hidden>Parar busca</button>
+
+  <label class="field" for="names">
+    <span>Nomes a procurar (separe por vírgula; vazio mostra todos)</span>
+    <input id="names" type="text" value="GM2, Fone foda" autocomplete="off" autocapitalize="off" spellcheck="false">
+  </label>
+
+  <div class="row">
+    <button class="sec" id="snd" type="button" aria-pressed="true">Bipe: ligado</button>
+    <button class="sec" id="vib" type="button" aria-pressed="true">Vibrar: ligado</button>
+  </div>
+
+  <p class="note"><b>Antes de começar:</b> abra a caixinha ou ponha o fone em modo de pareamento. Use o Chrome no Android, com Bluetooth e Localização ligados. A distância é só uma estimativa: paredes e pessoas alteram o sinal.</p>
+  <noscript><p class="note">Este app precisa de JavaScript.</p></noscript>
+</main>
+<script type="module" src="src/app.js"></script>
+</body>
+</html>
